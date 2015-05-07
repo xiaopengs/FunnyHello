@@ -1,5 +1,9 @@
 package com.xiaopeng.funnyhello;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,10 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.xiaopeng.funnyhello.utils.DrawerLayoutInstaller;
 import com.xiaopeng.funnyhello.utils.Utils;
 import com.xiaopeng.funnyhello.view.GlobalMenuView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -19,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private MenuItem inboxMenuItem;
     private DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +40,11 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setupToolbar();
         setupDrawer();
-        setupList();
+        try {
+            setupList();
+        } catch (PackageManager.NameNotFoundException e) {
+            Toast.makeText(getApplicationContext(),"获取activity列表失败", Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void setupToolbar() {
@@ -53,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
                 .build();
     }
 
-    private void setupList(){
+    private void setupList() throws PackageManager.NameNotFoundException{
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
 
@@ -61,13 +74,18 @@ public class MainActivity extends ActionBarActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
+        ActivityInfo[] infos = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES)
+                .activities;
 
-        String[] dataset = new String[100];
-        for (int i = 0; i < dataset.length; i++){
-            dataset[i] = "item" + i;
+        ArrayList<ActivityInfo> infoArrayList = new ArrayList<>();
+
+        for(ActivityInfo info : infos){
+            if(info.name.startsWith("com.xiaopeng.funnyhello.activity")){
+                infoArrayList.add(info);
+            }
         }
 
-        MyAdapter adapter = new MyAdapter(this,dataset);
+        MyAdapter adapter = new MyAdapter(this, infoArrayList);
 
         recyclerView.setAdapter(adapter);
     }
