@@ -1,14 +1,18 @@
 package com.xiaopeng.funnyhello.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.xiaopeng.funnyhello.MainActivity;
 import com.xiaopeng.funnyhello.R;
+import com.xiaopeng.funnyhello.view.GlobalMenuView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +75,7 @@ public class GlobalMenuAdapter extends ArrayAdapter<GlobalMenuAdapter.GlobalMenu
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (getItemViewType(position) == TYPE_MENU_ITEM) {
             MenuItemViewHolder holder;
             if (convertView == null) {
@@ -87,10 +91,17 @@ public class GlobalMenuAdapter extends ArrayAdapter<GlobalMenuAdapter.GlobalMenu
             holder.ivIcon.setImageResource(item.iconResId);
             holder.ivIcon.setVisibility(item.iconResId == 0 ? View.GONE : View.VISIBLE);
 
-            return convertView;
+
         } else {
-            return inflater.inflate(R.layout.item_menu_divider, parent, false);
+            convertView = inflater.inflate(R.layout.item_menu_divider, parent, false);
         }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), position + " position", Toast.LENGTH_LONG).show();
+            }
+        });
+        return convertView;
     }
 
     @Override

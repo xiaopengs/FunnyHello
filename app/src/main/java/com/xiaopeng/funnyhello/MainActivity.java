@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.xiaopeng.funnyhello.utils.DrawerLayoutInstaller;
@@ -36,12 +38,12 @@ public class MainActivity extends ActionBarActivity {
         initUI();
     }
 
-    private void initUI() {
+    private void initUI(){
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setupToolbar();
         setupDrawer();
         try {
-            setupList();
+            setupList(R.string.category_keyguard);
         } catch (PackageManager.NameNotFoundException e) {
             Toast.makeText(getApplicationContext(),"获取activity列表失败", Toast.LENGTH_LONG).show();
         }
@@ -56,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void setupDrawer() {
         GlobalMenuView menuView = new GlobalMenuView(this);
-        //menuView.setOnHeaderClickListener(this);
+//        menuView.setOnHeaderClickListener(this);
 
         drawerLayout = DrawerLayoutInstaller.from(this)
                 .drawerRoot(R.layout.drawer_root)
@@ -66,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                 .build();
     }
 
-    private void setupList() throws PackageManager.NameNotFoundException{
+    private void setupList(int res) throws PackageManager.NameNotFoundException{
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
 
@@ -74,13 +76,18 @@ public class MainActivity extends ActionBarActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        ActivityInfo[] infos = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES)
+        ActivityInfo[] infos = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES |
+                PackageManager.GET_META_DATA)
                 .activities;
 
         ArrayList<ActivityInfo> infoArrayList = new ArrayList<>();
 
         for(ActivityInfo info : infos){
-            if(info.name.startsWith("com.xiaopeng.funnyhello.activity")){
+            if(info.metaData != null) Log.e("sunfei", " meta" +  info.metaData.getString("category", "null"));
+            Log.e("sunfei", getResources().getString(res));
+            if(info.metaData != null &&
+                    info.metaData.getString("category").equals(getResources().getString
+                    (res))){
                 infoArrayList.add(info);
             }
         }

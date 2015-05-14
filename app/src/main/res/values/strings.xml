@@ -6,4 +6,10 @@
 
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
     <string name="title_activity_list_demo">测试用Activity</string>
+
+    <!--categories of meta data for different activities and services-->
+    <string name="category_keyguard">category_keyguard</string>
+    <string name="category_notify">category_notify</string>
+    <string name="category_others">category_others</string>
+    <string name="title_activity_demo2">Demo2Activity</string>
 </resources>
