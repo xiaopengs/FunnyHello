@@ -32,6 +32,13 @@
                 android:name="category"
                 android:value="@string/category_others" />
         </activity>
+        <activity
+            android:name=".activity.TouchEventTestActivity"
+            android:label="@string/touch_test_title" >
+            <meta-data
+                android:name="category"
+                android:value="@string/category_keyguard" />
+        </activity>
     </application>
 
 </manifest>

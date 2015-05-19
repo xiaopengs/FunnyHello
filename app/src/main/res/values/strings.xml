@@ -11,5 +11,7 @@
     <string name="category_keyguard">category_keyguard</string>
     <string name="category_notify">category_notify</string>
     <string name="category_others">category_others</string>
-    <string name="title_activity_demo2">Demo2Activity</string>
+    <string name="title_activity_demo2">测试1</string>
+    <string name="touch_test_title">事件传递学习</string>
+
 </resources>

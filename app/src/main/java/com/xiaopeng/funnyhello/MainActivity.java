@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         try {
             setupList(R.string.category_keyguard);
         } catch (PackageManager.NameNotFoundException e) {
-            Toast.makeText(getApplicationContext(),"获取activity列表失败", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"get activity list failed", Toast.LENGTH_LONG).show();
         }
     }
 
