@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xiaopeng.funnyhello" >
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,7 +38,7 @@
             android:label="@string/title_activity_demo2" >
             <meta-data
                 android:name="category"
-                android:value="@string/category_others" />
+                android:value="@string/category_keyguard"/>
         </activity>
         <activity
             android:name=".activity.TouchEventTestActivity"
