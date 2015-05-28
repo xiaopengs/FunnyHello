@@ -151,18 +151,17 @@ public class Demo2Activity extends ActionBarActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         PluginItem item = mPluginItems.get(position);
-        //DLPluginManager pluginManager = DLPluginManager.getInstance(this);
-        //pluginManager.startPluginActivity(this, new DLIntent(item.packageInfo.packageName, item.launcherActivityName));
-//        LPluginBugManager.addBugListener(new LPluginBugListener() {
-//            @Override
-//            public void OnError(LPluginBug bug) {
-//
-//                Log.e("DEBUG", bug.error.getMessage());
-//                android.os.Process.killProcess(bug.processId);
-//                System.exit(10);
-//            }
-//        });
-//        LPluginOpener.startPlugin(RunApkFromSdcard.this, path);
+        Log.e("xiaopeng", "xiaopeng item.pluginPath = " + item.pluginPath);
+        LPluginBugManager.addBugListener(new LPluginBugListener() {
+            @Override
+            public void OnError(LPluginBug bug) {
+
+                Log.e("DEBUG", bug.error.getMessage());
+                android.os.Process.killProcess(bug.processId);
+                System.exit(10);
+            }
+        });
+        LPluginOpener.startPlugin(Demo2Activity.this, item.pluginPath);
     }
 
     @Override
