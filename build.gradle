@@ -16,6 +16,10 @@ ext {
     compileSdkVersion = 22
     buildToolsVersion = "22.0.1"
 }
+
+allprojects.each { p ->
+    p.buildDir "bin"
+}
 allprojects {
     repositories {
         maven { url "http://maven.oschina.net/content/groups/public" }
