@@ -1,7 +1,10 @@
 package com.xiaopeng.funnyhello.activity;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +23,7 @@ import com.lody.plugin.LPluginOpener;
 import com.lody.plugin.api.LPluginBug;
 import com.lody.plugin.api.LPluginBugListener;
 import com.lody.plugin.manager.LPluginBugManager;
+import com.morgoo.droidplugin.pm.PluginManager;
 import com.xiaopeng.funnyhello.R;
 import com.xiaopeng.funnyhello.utils.Utils;
 
@@ -27,7 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Demo2Activity extends ActionBarActivity implements AdapterView.OnItemClickListener {
-
+    private static final String TAG = "Demo2Activity";
     private ArrayList<PluginItem> mPluginItems = new ArrayList<PluginItem>();
     private PluginAdapter mPluginAdapter;
 
@@ -152,6 +156,16 @@ public class Demo2Activity extends ActionBarActivity implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         PluginItem item = mPluginItems.get(position);
         Log.e("xiaopeng", "xiaopeng item.pluginPath = " + item.pluginPath);
+        try {
+            PluginManager.getInstance().installPackage(item.pluginPath, 0);
+        }catch(RemoteException e){
+            e.printStackTrace();
+        }
+
+
+        String pkgName = item.packageInfo.applicationInfo.packageName;
+        startActivityByName(pkgName);
+        /*
         LPluginBugManager.addBugListener(new LPluginBugListener() {
             @Override
             public void OnError(LPluginBug bug) {
@@ -162,6 +176,17 @@ public class Demo2Activity extends ActionBarActivity implements AdapterView.OnIt
             }
         });
         LPluginOpener.startPlugin(Demo2Activity.this, item.pluginPath);
+        */
+    }
+
+    private void startActivityByName(String packageName){
+        Intent intent= new Intent();
+        try {
+            intent =this.getPackageManager().getLaunchIntentForPackage(packageName);
+        } catch (Exception e) {
+            Log.i(TAG, e.toString());
+        }
+        startActivity(intent);
     }
 
     @Override
