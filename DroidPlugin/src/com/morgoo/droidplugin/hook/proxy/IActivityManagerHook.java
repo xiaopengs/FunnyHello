@@ -88,7 +88,7 @@ public class IActivityManagerHook extends ProxyHook {
             FieldUtils.writeField(obj, "mInstance", object);
 
             //这里使用方式1，如果成功的话，会导致上面的写操作被覆盖。
-            FieldUtils.writeStaticField(cls, "gDefault", new Singleton<Object>() {
+            FieldUtils.writeStaticField(cls, "gDefault", new android.util.Singleton<Object>() {
                 @Override
                 protected Object create() {
                     Log.e(TAG, "Install ActivityManager 3 Hook  old=%s,new=%s", mOldObj, object);
@@ -107,19 +107,4 @@ public class IActivityManagerHook extends ProxyHook {
             throw new AndroidRuntimeException("Can not install IActivityManagerNative hook");
         }
     }
-
-    public abstract class Singleton<T> {
-            private T mInstance;
-
-           protected abstract T create();
-
-            public final T get() {
-                   synchronized (this) {
-                            if (mInstance == null) {
-                                    mInstance = create();
-                                }
-                            return mInstance;
-                       }
-                }
-        }
 }
