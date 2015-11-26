@@ -15,4 +15,5 @@
     <string name="touch_test_title">事件传递学习</string>
     <string name="title_activity_async_list">AsyncListActivity</string>
 
+    <string name="scaning">扫描中...</string>
 </resources>

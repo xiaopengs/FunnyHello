@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.xiaopeng.funnyhello.activity.SecurityAnimActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/common_color_main_bg"
+        android:orientation="vertical" >
+
+        <com.xiaopeng.funnyhello.view.CustomFrameLayout
+            android:id="@+id/clearFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/cleanupImageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/common_cleanup1" />
+
+            <ImageView
+                android:id="@+id/cleanupImageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/common_cleanup2" />
+
+            <ImageView
+                android:id="@+id/animationDrawableImageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/clear_scan" />
+
+        </com.xiaopeng.funnyhello.view.CustomFrameLayout>
+
+        <TextView
+            android:id="@+id/cleartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/scaning"
+            android:textColor="#FFFFFFFF"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+</RelativeLayout>
