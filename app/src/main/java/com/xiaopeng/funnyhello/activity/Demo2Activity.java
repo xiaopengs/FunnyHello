@@ -19,10 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lody.plugin.LPluginOpener;
-import com.lody.plugin.api.LPluginBug;
-import com.lody.plugin.api.LPluginBugListener;
-import com.lody.plugin.manager.LPluginBugManager;
 import com.morgoo.droidplugin.pm.PluginManager;
 import com.xiaopeng.funnyhello.R;
 import com.xiaopeng.funnyhello.utils.Utils;

@@ -1,3 +1,2 @@
 include ':app'
-include ':dlalibrary'
 include ':DroidPlugin'

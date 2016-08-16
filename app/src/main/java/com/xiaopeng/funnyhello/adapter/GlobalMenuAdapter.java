@@ -88,7 +88,9 @@ public class GlobalMenuAdapter extends ArrayAdapter<GlobalMenuAdapter.GlobalMenu
 
             GlobalMenuItem item = getItem(position);
             holder.tvLabel.setText(item.label);
-            holder.ivIcon.setImageResource(item.iconResId);
+            if(item.iconResId != 0){
+                holder.ivIcon.setImageResource(item.iconResId);
+            }
             holder.ivIcon.setVisibility(item.iconResId == 0 ? View.GONE : View.VISIBLE);
 
 
